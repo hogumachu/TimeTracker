@@ -16,11 +16,21 @@ import DesignSystem
 final class SplashView: BaseView {
   
   private let rootView = UIView()
+  private let label = UILabel()
   
   override func setupLayout() {
     super.setupLayout()
     addSubview(rootView)
     rootView.backgroundColor = DesignSystem.BackgroundColor.base
+    label.text = "Hello, TimeTracker"
+    label.textColor = DesignSystem.TextColor.primary
+    label.font = DesignSystem.Typography.header1
+    rootView.flex
+      .alignItems(.center)
+      .alignContent(.center)
+      .define {
+        $0.addItem(label)
+      }
   }
   
   override func layoutSubviews() {

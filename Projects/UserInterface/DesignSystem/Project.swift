@@ -7,10 +7,14 @@ let project = Project.module(
   targets: [
     .implements(
       module: .userInterface(.DesignSystem),
-      dependencies: [
-        .SPM.FlexLayout,
-        .SPM.PinLayout
-      ]
+      spec: .init(
+        sources: .sources,
+        resources: .resources(["Resources/**"]),
+        dependencies: [
+          .SPM.FlexLayout,
+          .SPM.PinLayout
+        ]
+      )
     ),
     .demo(
       module: .userInterface(.DesignSystem),
