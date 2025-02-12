@@ -11,23 +11,15 @@ import UIKit
 extension DesignSystem {
   
   public enum Typography {
-    public static let header1 = UIFont(data: DesignSystemAsset.pretendardSemiBold, size: 28)
-    public static let header2 = UIFont(data: DesignSystemAsset.pretendardSemiBold, size: 24)
-    public static let subtitle1 = UIFont(data: DesignSystemAsset.pretendardSemiBold, size: 18)
-    public static let subtitle2 = UIFont(data: DesignSystemAsset.pretendardSemiBold, size: 16)
-    public static let subtitle3 = UIFont(data: DesignSystemAsset.pretendardSemiBold, size: 14)
-    public static let subtitle4 = UIFont(data: DesignSystemAsset.pretendardSemiBold, size: 12)
-    public static let body1 = UIFont(data: DesignSystemAsset.pretendardRegular, size: 16)
-    public static let body2 = UIFont(data: DesignSystemAsset.pretendardRegular, size: 14)
-    public static let caption1 = UIFont(data: DesignSystemAsset.pretendardRegular, size: 12)
-    public static let caption2 = UIFont(data: DesignSystemAsset.pretendardSemiBold, size: 10)
-  }
-}
-
-// MARK: - Internal
-
-private extension UIFont {
-  convenience init?(data: DesignSystemData, size: CGFloat) {
-    self.init(name: data.name, size: size)
+    public static let header1 = DesignSystemFontFamily.Pretendard.semiBold.font(size: 28)
+    public static let header2 = DesignSystemFontFamily.Pretendard.semiBold.font(size: 24)
+    public static let subtitle1 = DesignSystemFontFamily.Pretendard.semiBold.font(size: 18)
+    public static let subtitle2 = DesignSystemFontFamily.Pretendard.semiBold.font(size: 16)
+    public static let subtitle3 = DesignSystemFontFamily.Pretendard.semiBold.font(size: 14)
+    public static let subtitle4 = DesignSystemFontFamily.Pretendard.semiBold.font(size: 12)
+    public static let body1 = DesignSystemFontFamily.Pretendard.regular.font(size: 16)
+    public static let body2 = DesignSystemFontFamily.Pretendard.regular.font(size: 14)
+    public static let caption1 = DesignSystemFontFamily.Pretendard.regular.font(size: 12)
+    public static let caption2 = DesignSystemFontFamily.Pretendard.semiBold.font(size: 10)
   }
 }
