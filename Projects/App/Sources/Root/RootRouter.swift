@@ -15,8 +15,7 @@ import SplashInterface
 protocol RootInteractable:
   Interactable,
   HomeDashboardListener,
-  SplashListener
-{
+  SplashListener {
   var router: RootRouting? { get set }
   var listener: RootListener? { get set }
 }

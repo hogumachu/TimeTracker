@@ -12,8 +12,10 @@ import RIBs
 import AppFoundation
 import HomeInterface
 import SplashInterface
+import UserServiceInterface
 
 protocol RootDependency: NeedleFoundation.Dependency {
+  var userService: UserServicable { get }
   var homeDashboardBuilder: HomeDashboardBuildable { get }
   var splashBuilder: SplashBuildable { get }
 }
@@ -30,7 +32,10 @@ final class RootBuilder: ComponentizedBuilder<RootComponent, LaunchRouting, Void
     _ dynamicBuildDependency: Void
   ) -> LaunchRouting {
     let viewController = RootViewController()
-    let interactor = RootInteractor(presenter: viewController)
+    let interactor = RootInteractor(
+      presenter: viewController,
+      userSerivce: component.userService
+    )
     let router = RootRouter(
       interactor: interactor,
       viewController: viewController,

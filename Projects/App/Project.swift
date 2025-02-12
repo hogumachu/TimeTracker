@@ -29,6 +29,7 @@ let targets: [Target] = [
     dependencies: [
       .feature(target: .Home),
       .feature(target: .Splash),
+      .domain(target: .UserService),
     ],
     settings: .settings(base: env.baseSetting)
   )

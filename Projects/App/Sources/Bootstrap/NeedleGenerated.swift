@@ -8,6 +8,8 @@ import NeedleFoundation
 import RIBs
 import Splash
 import SplashInterface
+import UserService
+import UserServiceInterface
 
 // swiftlint:disable unused_declaration
 private let needleDependenciesHash : String? = nil
@@ -23,6 +25,9 @@ private func parent1(_ component: NeedleFoundation.Scope) -> NeedleFoundation.Sc
 #if !NEEDLE_DYNAMIC
 
 private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
+    var userService: UserServicable {
+        return appComponent.userService
+    }
     var homeDashboardBuilder: HomeDashboardBuildable {
         return appComponent.homeDashboardBuilder
     }
@@ -70,6 +75,7 @@ extension AppComponent: NeedleFoundation.Registration {
 }
 extension RootComponent: NeedleFoundation.Registration {
     public func registerItems() {
+        keyPathToName[\RootDependency.userService] = "userService-UserServicable"
         keyPathToName[\RootDependency.homeDashboardBuilder] = "homeDashboardBuilder-HomeDashboardBuildable"
         keyPathToName[\RootDependency.splashBuilder] = "splashBuilder-SplashBuildable"
     }

@@ -14,12 +14,22 @@ import Home
 import HomeInterface
 import Splash
 import SplashInterface
+import UserService
+import UserServiceInterface
 
 final class AppComponent: BootstrapComponent {
   var rootBuilder: RootBuildable {
     RootBuilder {
       RootComponent(parent: self)
     }
+  }
+}
+
+// MARK: - Root
+
+extension AppComponent {
+  var userService: UserServicable {
+    shared { UserService() }
   }
 }
 
