@@ -1,1 +1,11 @@
-# Empty
+disabled_rules:
+- trailing_whitespace
+- trailing_comma
+- closure_parameter_position
+
+identifier_name:
+  max_length:
+    warning: 40
+    error: 60
+  min_length:
+    warning: 1

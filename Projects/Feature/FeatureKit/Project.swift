@@ -11,6 +11,7 @@ let project = Project.module(
         .shared(target: .AppFoundation),
         .shared(target: .Platform),
         .userInterface(target: .DesignSystem),
+        .SPM.Needle
       ]
     )
   ]

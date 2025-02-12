@@ -13,7 +13,7 @@ let settings: Settings = .settings(
   defaultSettings: .recommended
 )
 
-let scripts: [TargetScript] = generateEnvironment.scripts
+let scripts: [TargetScript] = generateEnvironment.scripts + [.needleGenerate]
 
 let targets: [Target] = [
   .target(
