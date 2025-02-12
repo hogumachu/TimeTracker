@@ -22,6 +22,7 @@ let packageSetting = PackageSettings(
 let package = Package(
   name: "Package",
   dependencies: [
+    .package(url: "https://github.com/devxoul/Then", from: "3.0.0"),
     .package(url: "https://github.com/uber/needle", from: "0.25.1"),
     .package(url: "https://github.com/ReactiveX/RxSwift", from: "6.8.0"),
     .package(url: "https://github.com/layoutBox/PinLayout", from: "1.10.5"),

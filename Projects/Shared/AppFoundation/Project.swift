@@ -11,7 +11,8 @@ let project = Project.module(
       ),
       product: .framework,
       dependencies: [
-        .SPM.RIBs
+        .SPM.RIBs,
+        .SPM.Then
       ]
     )
   ]
