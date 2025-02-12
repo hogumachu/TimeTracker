@@ -6,6 +6,9 @@
 import ProjectDescriptionHelpers
 
 let packageSetting = PackageSettings(
+  productTypes: [
+    "RIBs": .framework
+  ],
   baseSettings: .settings(
     configurations: [
       .debug(name: .dev),

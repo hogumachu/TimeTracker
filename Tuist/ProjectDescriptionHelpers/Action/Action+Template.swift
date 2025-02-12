@@ -14,7 +14,6 @@ public extension TargetScript {
     "$SRCROOT/../" \
     --exclude-suffixes Tests Mocks \
     --exclude-paths /Demo /Tests /Resources
-    swiftformat ${FILE_PATH}/NeedleGenerated.swift
     """,
     name: "Needle"
   )
