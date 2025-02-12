@@ -120,7 +120,7 @@ func makeDirectories(_ paths: [String]) {
 func makeProjectSwift(targetString: String) {
   let projectSwift = """
 import DependencyPlugin
-import ProjectDescription
+@preconcurrency import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.module(

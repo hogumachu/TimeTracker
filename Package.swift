@@ -18,5 +18,10 @@ let packageSetting = PackageSettings(
 
 let package = Package(
   name: "Package",
-  dependencies: []
+  dependencies: [
+    .package(url: "https://github.com/ReactiveX/RxSwift", from: "6.8.0"),
+    .package(url: "https://github.com/layoutBox/PinLayout", from: "1.10.5"),
+    .package(url: "https://github.com/layoutBox/FlexLayout", from: "2.1.0"),
+    .package(url: "https://github.com/uber/RIBs-iOS", from: "0.16.3"),
+  ]
 )

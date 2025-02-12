@@ -1,0 +1,50 @@
+{
+  "pins" : [
+    {
+      "identity" : "flexlayout",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/layoutBox/FlexLayout",
+      "state" : {
+        "revision" : "0ceb4f5e3da86b6f2988eed7ee7a09296a193dd9",
+        "version" : "2.1.0"
+      }
+    },
+    {
+      "identity" : "pinlayout",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/layoutBox/PinLayout",
+      "state" : {
+        "revision" : "8eaa3a15e4dcabaca4c95aea4c0ff0c9b4a67213",
+        "version" : "1.10.5"
+      }
+    },
+    {
+      "identity" : "ribs-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/uber/RIBs-iOS",
+      "state" : {
+        "revision" : "bc4abbc25f485bff1c1955994a19d5104b209f08",
+        "version" : "0.16.3"
+      }
+    },
+    {
+      "identity" : "rxswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveX/RxSwift",
+      "state" : {
+        "revision" : "c7c7d2cf50a3211fe2843f76869c698e4e417930",
+        "version" : "6.8.0"
+      }
+    },
+    {
+      "identity" : "yoga",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/facebook/yoga.git",
+      "state" : {
+        "revision" : "042f5013152eb81c1552dec945b88f7b95ca350f",
+        "version" : "3.2.1"
+      }
+    }
+  ],
+  "version" : 2
+}
