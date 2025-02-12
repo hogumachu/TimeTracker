@@ -20,7 +20,7 @@ final class SplashView: BaseView {
   override func setupLayout() {
     super.setupLayout()
     addSubview(rootView)
-    rootView.backgroundColor = .red
+    rootView.backgroundColor = DesignSystem.BackgroundColor.base
   }
   
   override func layoutSubviews() {
