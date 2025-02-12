@@ -8,18 +8,62 @@
 
 import RIBs
 
-protocol RootInteractable: Interactable {
+import AppFoundation
+import HomeInterface
+import SplashInterface
+
+protocol RootInteractable:
+  Interactable,
+  HomeDashboardListener,
+  SplashListener
+{
   var router: RootRouting? { get set }
   var listener: RootListener? { get set }
 }
 
 protocol RootViewControllable: ViewControllable {}
 
-final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>,
-                        RootRouting {
+final class RootRouter:
+  LaunchRouter<RootInteractable, RootViewControllable>,
+  RootRouting {
   
-  override init(interactor: RootInteractable, viewController: RootViewControllable) {
+  private let homeDashboardBuilder: HomeDashboardBuildable
+  private var homeDashboardRouting: ViewableRouting?
+  private let splashBuilder: SplashBuildable
+  private var splashRouting: ViewableRouting?
+  
+  init(
+    interactor: RootInteractable,
+    viewController: RootViewControllable,
+    homeDashboardBuilder: HomeDashboardBuildable,
+    splashBuilder: SplashBuildable
+  ) {
+    self.homeDashboardBuilder = homeDashboardBuilder
+    self.splashBuilder = splashBuilder
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
+  }
+  
+  func attachTabs() {
+    guard homeDashboardRouting == nil else { return }
+    let router = homeDashboardBuilder.build(with: .init(listener: interactor))
+    homeDashboardRouting = router
+    attachChild(router)
+    viewController.setViewControllers([router.viewControllable], animated: false)
+  }
+    
+  func attachSplash() {
+    guard splashRouting == nil else { return }
+    let router = splashBuilder.build(with: .init(listener: interactor))
+    splashRouting = router
+    attachChild(router)
+    viewController.present(router.viewControllable)
+  }
+  
+  func detachSplash() {
+    guard let router = splashRouting else { return }
+    detachChild(router)
+    splashRouting = nil
+    router.viewControllable.dismiss()
   }
 }

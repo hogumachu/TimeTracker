@@ -20,6 +20,5 @@ open class BaseView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  
   open func setupLayout() {}
 }

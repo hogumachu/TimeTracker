@@ -3,6 +3,8 @@ disabled_rules:
 - trailing_comma
 - closure_parameter_position
 
+force_cast: warning
+
 identifier_name:
   max_length:
     warning: 40

@@ -9,6 +9,7 @@ let project = Project.module(
       module: .shared(
         .AppFoundation
       ),
+      product: .framework,
       dependencies: [
         .SPM.RIBs
       ]

@@ -7,12 +7,38 @@
 //
 
 import Foundation
+
 import NeedleFoundation
+
+import Home
+import HomeInterface
+import Splash
+import SplashInterface
 
 final class AppComponent: BootstrapComponent {
   var rootBuilder: RootBuildable {
     RootBuilder {
       RootComponent(parent: self)
+    }
+  }
+}
+
+// MARK: - HomeDashboard
+
+extension AppComponent {
+  var homeDashboardBuilder: HomeDashboardBuildable {
+    HomeDashboardBuilder {
+      HomeDashboardComponent(parent: self)
+    }
+  }
+}
+
+// MARK: - Splash
+
+extension AppComponent {
+  var splashBuilder: SplashBuildable {
+    SplashBuilder {
+      SplashComponent(parent: self)
     }
   }
 }

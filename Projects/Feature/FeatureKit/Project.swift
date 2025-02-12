@@ -7,6 +7,7 @@ let project = Project.module(
   targets: [
     .implements(
       module: .feature(.FeatureKit),
+      product: .framework,
       dependencies: [
         .shared(target: .AppFoundation),
         .shared(target: .Platform),

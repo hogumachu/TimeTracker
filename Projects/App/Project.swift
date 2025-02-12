@@ -27,7 +27,8 @@ let targets: [Target] = [
     resources: ["Resources/**"],
     scripts: scripts,
     dependencies: [
-      .feature(target: .FeatureKit)
+      .feature(target: .Home),
+      .feature(target: .Splash),
     ],
     settings: .settings(base: env.baseSetting)
   )

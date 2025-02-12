@@ -10,7 +10,11 @@ import AppFoundation
 import RIBs
 import RxSwift
 
-protocol RootRouting: ViewableRouting {}
+protocol RootRouting: ViewableRouting {
+  func attachTabs()
+  func attachSplash()
+  func detachSplash()
+}
 
 protocol RootPresentable: Presentable {
   var listener: RootPresentableListener? { get set }
@@ -18,7 +22,10 @@ protocol RootPresentable: Presentable {
 
 protocol RootListener: AnyObject {}
 
-final class RootInteractor: PresentableInteractor<RootPresentable>, RootInteractable, RootPresentableListener {
+final class RootInteractor:
+  PresentableInteractor<RootPresentable>,
+  RootInteractable,
+  RootPresentableListener {
   
   weak var router: RootRouting?
   weak var listener: RootListener?
@@ -30,9 +37,19 @@ final class RootInteractor: PresentableInteractor<RootPresentable>, RootInteract
   
   override func didBecomeActive() {
     super.didBecomeActive()
+    router?.attachSplash()
   }
   
   override func willResignActive() {
     super.willResignActive()
+  }
+}
+
+// MARK: - Splash
+
+extension RootInteractor {
+  func splashCompleted() {
+    router?.detachSplash()
+    router?.attachTabs()
   }
 }

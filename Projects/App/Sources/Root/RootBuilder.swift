@@ -6,11 +6,17 @@
 //  Copyright © 2025 com.hogumachu. All rights reserved.
 //
 
-import AppFoundation
 import NeedleFoundation
 import RIBs
 
-protocol RootDependency: NeedleFoundation.Dependency {}
+import AppFoundation
+import HomeInterface
+import SplashInterface
+
+protocol RootDependency: NeedleFoundation.Dependency {
+  var homeDashboardBuilder: HomeDashboardBuildable { get }
+  var splashBuilder: SplashBuildable { get }
+}
 
 final class RootComponent: NeedleFoundation.Component<RootDependency> {}
 
@@ -27,7 +33,9 @@ final class RootBuilder: ComponentizedBuilder<RootComponent, LaunchRouting, Void
     let interactor = RootInteractor(presenter: viewController)
     let router = RootRouter(
       interactor: interactor,
-      viewController: viewController
+      viewController: viewController,
+      homeDashboardBuilder: component.homeDashboardBuilder,
+      splashBuilder: component.splashBuilder
     )
     return router
   }

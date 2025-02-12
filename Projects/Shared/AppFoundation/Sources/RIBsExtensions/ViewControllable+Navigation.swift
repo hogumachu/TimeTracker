@@ -9,7 +9,6 @@
 import RIBs
 import UIKit
 
-@MainActor
 extension ViewControllable {
   public var navigationController: UINavigationController? {
     uiviewController as? UINavigationController ?? uiviewController.navigationController
@@ -28,14 +27,10 @@ extension ViewControllable {
   }
   
   public func dismiss(
-    _ viewController: ViewControllable,
     animated: Bool = true,
     completion: (() -> Void)? = nil
   ) {
-    viewController.uiviewController.dismiss(
-      animated: animated,
-      completion: completion
-    )
+    uiviewController.dismiss(animated: animated, completion: completion)
   }
   
   public func pushViewController(

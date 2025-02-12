@@ -7,7 +7,6 @@ let project = Project.module(
   targets: [
     .implements(
       module: .userInterface(.DesignSystem),
-      product: .framework,
       dependencies: [
         .SPM.FlexLayout,
         .SPM.PinLayout
