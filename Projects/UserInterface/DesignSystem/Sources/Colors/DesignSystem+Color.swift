@@ -94,7 +94,13 @@ extension DesignSystem {
   public enum TextColor {
     public static let primary = DynamicColor(lightHex: "#384553", darkHex: "#F7F8F9").dynamic
     public static let seconday = DynamicColor(lightHex: "#646F7C", darkHex: "#C5C8CE").dynamic
-    public static let disabled = DynamicColor(lightHex: "#C5C8CE", darkHex: "#F9A4A0").dynamic
-    public static let placeholder = DynamicColor(lightHex: "#C5C8CE", darkHex: "#F9A4A0").dynamic
+    public static let disabled = DynamicColor(lightHex: "#C5C8CE", darkHex: "#5A6166").dynamic
+    public static let placeholder = DynamicColor(lightHex: "#C5C8CE", darkHex: "#5A6166").dynamic
+  }
+  
+  // MARK: - Sub
+  
+  public enum SubColor {
+    public static let red100 = DynamicColor(lightHex: "#FF2C51", darkHex: "#F26175").dynamic
   }
 }
