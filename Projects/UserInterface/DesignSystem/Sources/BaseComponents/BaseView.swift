@@ -20,5 +20,7 @@ open class BaseView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  open func setupLayout() {}
+  open func setupLayout() {
+    backgroundColor = DesignSystem.BackgroundColor.base
+  }
 }
