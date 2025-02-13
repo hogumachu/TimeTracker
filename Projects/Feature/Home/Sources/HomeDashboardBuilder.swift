@@ -32,8 +32,7 @@ HomeDashboardRouting,
 HomeDashboardBuildDependency,
 HomeDashboardComponentDepenency
 >,
-HomeDashboardBuildable
-{
+HomeDashboardBuildable {
   
   override public func build(
     with component: HomeDashboardComponent,

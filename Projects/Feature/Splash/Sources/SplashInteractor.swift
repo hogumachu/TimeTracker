@@ -21,8 +21,7 @@ protocol SplashPresentable: Presentable {
 
 final class SplashInteractor:
   PresentableInteractor<SplashPresentable>,
-  SplashInteractable
-{
+  SplashInteractable {
   
   weak var router: SplashRouting?
   weak var listener: SplashListener?
