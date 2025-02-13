@@ -50,9 +50,14 @@ final class RootRouter:
     let router = homeDashboardBuilder.build(with: .init(listener: interactor))
     homeDashboardRouting = router
     attachChild(router)
-    viewController.setTabs([router.viewControllable], animated: false)
+    viewController.setTabs(
+      [
+        NavigationControllable(viewControllable: router.viewControllable)
+      ],
+      animated: false
+    )
   }
-    
+  
   func attachSplash() {
     guard splashRouting == nil else { return }
     let router = splashBuilder.build(with: .init(listener: interactor))

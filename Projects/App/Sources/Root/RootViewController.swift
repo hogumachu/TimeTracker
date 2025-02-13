@@ -37,7 +37,6 @@ final class RootViewController: UITabBarController,
   
   func setTabs(_ viewControllables: [ViewControllable], animated: Bool) {
     super.setViewControllers(viewControllables.map(\.uiviewController), animated: animated)
-    selectedIndex = 0
   }
   
   private func setupTabBar() {
