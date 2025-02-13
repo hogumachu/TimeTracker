@@ -11,12 +11,14 @@ import Foundation
 import RIBs
 import RxSwift
 
+import CalendarServiceInterface
 import HomeInterface
 
 // MARK: - HomeDashboardPresentable
 
 protocol HomeDashboardPresentable: Presentable {
   var listener: HomeDashboardPresentableListener? { get set }
+  func focus(on date: Date)
 }
 
 // MARK: - HomeDashboardInteractor
@@ -25,20 +27,31 @@ final class HomeDashboardInteractor:
   PresentableInteractor<HomeDashboardPresentable>,
   HomeDashboardInteractable,
   HomeDashboardPresentableListener {
-
+  
   weak var router: HomeDashboardRouting?
   weak var listener: HomeDashboardListener?
-
-  override init(presenter: HomeDashboardPresentable) {
+  
+  private let calendarService: CalendarServicable
+  
+  init(
+    presenter: HomeDashboardPresentable,
+    calendarService: CalendarServicable
+  ) {
+    self.calendarService = calendarService
     super.init(presenter: presenter)
     presenter.listener = self
   }
-
+  
   override func didBecomeActive() {
     super.didBecomeActive()
+    initialized()
   }
   
-  override func willResignActive() {
-    super.willResignActive()
+  private func initialized() {
+    calendarService.focusedDate
+      .subscribe(with: self) { this, date in
+        this.presenter.focus(on: date)
+      }
+      .disposeOnDeactivate(interactor: self)
   }
 }

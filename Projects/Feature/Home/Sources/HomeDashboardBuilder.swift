@@ -6,14 +6,18 @@
 //  Copyright © 2025 com.hogumachu. All rights reserved.
 //
 
-import AppFoundation
 import NeedleFoundation
 import RIBs
+
+import AppFoundation
+import CalendarServiceInterface
 import HomeInterface
 
 // MARK: - HomeDashboardDependency
 
-public protocol HomeDashboardDependency: NeedleFoundation.Dependency {}
+public protocol HomeDashboardDependency: NeedleFoundation.Dependency {
+  var calendarService: CalendarServicable { get }
+}
 
 // MARK: - DynamicComponentDependency
 
@@ -40,7 +44,8 @@ HomeDashboardBuildable {
   ) -> HomeDashboardRouting {
     let viewController = HomeDashboardViewController()
     let interactor = HomeDashboardInteractor(
-      presenter: viewController
+      presenter: viewController,
+      calendarService: component.calendarService
     )
     interactor.listener = payload.listener
     

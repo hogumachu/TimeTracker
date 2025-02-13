@@ -15,8 +15,15 @@ protocol HomeDashboardPresentableListener: AnyObject {}
 
 final class HomeDashboardViewController:
   BaseViewController,
-  HomeDashboardPresentable,
   HomeDashboardViewControllable {
   
   weak var listener: HomeDashboardPresentableListener?
+  
+}
+
+extension HomeDashboardViewController: HomeDashboardPresentable {
+  
+  func focus(on date: Date) {
+    // TODO: - Date에 초점 이동
+  }
 }

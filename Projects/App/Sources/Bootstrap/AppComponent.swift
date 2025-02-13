@@ -10,6 +10,8 @@ import Foundation
 
 import NeedleFoundation
 
+import CalendarService
+import CalendarServiceInterface
 import Home
 import HomeInterface
 import Splash
@@ -25,11 +27,15 @@ final class AppComponent: BootstrapComponent {
   }
 }
 
-// MARK: - Root
+// MARK: - Service
 
 extension AppComponent {
   var userService: UserServicable {
     shared { UserService() }
+  }
+  
+  var calendarService: CalendarServicable {
+    shared { CalendarService(focusedDate: .now) }
   }
 }
 
