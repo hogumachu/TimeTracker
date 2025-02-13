@@ -12,9 +12,10 @@ let project = Project.module(
       ]
     ),
     .implements(module: .feature(.Home), dependencies: [
-      .feature(target: .Home, type: .interface),
+      .domain(target: .CalendarService, type: .interface),
       .feature(target: .FeatureKit),
-      .domain(target: .CalendarService, type: .interface)
+      .feature(target: .Home, type: .interface),
+      .userInterface(target: .CalendarUIKit)
     ]),
     .testing(module: .feature(.Home), dependencies: [
       .feature(target: .Home, type: .interface)

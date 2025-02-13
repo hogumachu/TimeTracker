@@ -53,6 +53,7 @@ public extension ModulePaths {
 
 public extension ModulePaths {
   enum UserInterface: String, MicroTargetPathConvertable {
+    case CalendarUIKit
     case DesignSystem
   }
 }

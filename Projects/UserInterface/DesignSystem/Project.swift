@@ -7,6 +7,7 @@ let project = Project.module(
   targets: [
     .implements(
       module: .userInterface(.DesignSystem),
+      product: .framework,
       spec: .init(
         sources: .sources,
         resources: .resources(["Resources/**"]),
