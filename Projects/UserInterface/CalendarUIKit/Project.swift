@@ -9,6 +9,7 @@ let project = Project.module(
       module: .userInterface(.CalendarUIKit),
       product: .framework,
       dependencies: [
+        .shared(target: .Platform),
         .userInterface(target: .DesignSystem)
       ]
     ),
