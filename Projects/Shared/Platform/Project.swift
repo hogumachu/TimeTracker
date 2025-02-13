@@ -7,6 +7,7 @@ let project = Project.module(
   targets: [
     .implements(
       module: .shared(.Platform),
+      product: .framework,
       dependencies: [
         .domain(target: .Entity)
       ]

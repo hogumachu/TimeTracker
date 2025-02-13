@@ -8,7 +8,7 @@ let project = Project.module(
     .interface(
       module: .domain(.UserService),
       dependencies: [
-        .domain(target: .Entity),
+        .shared(target: .Platform),
         .SPM.RxSwift
       ]
     ),

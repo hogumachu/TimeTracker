@@ -13,7 +13,8 @@ let project = Project.module(
     ),
     .implements(module: .feature(.Home), dependencies: [
       .feature(target: .Home, type: .interface),
-      .feature(target: .FeatureKit)
+      .feature(target: .FeatureKit),
+      .domain(target: .CalendarService, type: .interface)
     ]),
     .testing(module: .feature(.Home), dependencies: [
       .feature(target: .Home, type: .interface)
