@@ -1,6 +1,8 @@
 
 
 import AppFoundation
+import Calendar
+import CalendarInterface
 import CalendarService
 import CalendarServiceInterface
 import Foundation
@@ -46,6 +48,9 @@ private func factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5(_ component: Needle
     return RootDependency3944cc797a4a88956fb5Provider(appComponent: parent1(component) as! AppComponent)
 }
 private class HomeDashboardDependency6ab1c331b788a03d35b0Provider: HomeDashboardDependency {
+    var calendarBuilder: CalendarBuildable {
+        return appComponent.calendarBuilder
+    }
     var calendarService: CalendarServicable {
         return appComponent.calendarService
     }
@@ -69,6 +74,17 @@ private class SplashDependencye0cb7136f2ec3edfd60aProvider: SplashDependency {
 private func factoryace9f05f51d68f4c0677e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
     return SplashDependencye0cb7136f2ec3edfd60aProvider()
 }
+private class CalendarDependency413e3f1dda33aa6ff6aeProvider: CalendarDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->CalendarComponent
+private func factorye6390b2af02fceff6db0e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return CalendarDependency413e3f1dda33aa6ff6aeProvider()
+}
 
 #else
 extension AppComponent: NeedleFoundation.Registration {
@@ -86,10 +102,16 @@ extension RootComponent: NeedleFoundation.Registration {
 }
 extension HomeDashboardComponent: NeedleFoundation.Registration {
     public func registerItems() {
+        keyPathToName[\HomeDashboardDependency.calendarBuilder] = "calendarBuilder-CalendarBuildable"
         keyPathToName[\HomeDashboardDependency.calendarService] = "calendarService-CalendarServicable"
     }
 }
 extension SplashComponent: NeedleFoundation.Registration {
+    public func registerItems() {
+
+    }
+}
+extension CalendarComponent: NeedleFoundation.Registration {
     public func registerItems() {
 
     }
@@ -114,6 +136,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->HomeDashboardComponent", factory1b289746fa6e3ba53918f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SplashComponent", factoryace9f05f51d68f4c0677e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->CalendarComponent", factorye6390b2af02fceff6db0e3b0c44298fc1c149afb)
 }
 #endif
 

@@ -10,6 +10,8 @@ import Foundation
 
 import NeedleFoundation
 
+import Calendar
+import CalendarInterface
 import CalendarService
 import CalendarServiceInterface
 import Home
@@ -36,6 +38,16 @@ extension AppComponent {
   
   var calendarService: CalendarServicable {
     shared { CalendarService(focusedDate: .now) }
+  }
+}
+
+// MARK: - Calendar
+
+extension AppComponent {
+  var calendarBuilder: CalendarBuildable {
+    CalendarBuilder {
+      CalendarComponent(parent: self)
+    }
   }
 }
 

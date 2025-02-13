@@ -10,12 +10,14 @@ import NeedleFoundation
 import RIBs
 
 import AppFoundation
+import CalendarInterface
 import CalendarServiceInterface
 import HomeInterface
 
 // MARK: - HomeDashboardDependency
 
 public protocol HomeDashboardDependency: NeedleFoundation.Dependency {
+  var calendarBuilder: CalendarBuildable { get }
   var calendarService: CalendarServicable { get }
 }
 
@@ -51,7 +53,8 @@ HomeDashboardBuildable {
     
     return HomeDashboardRouter(
       interactor: interactor,
-      viewController: viewController
+      viewController: viewController,
+      calendarBuilder: component.calendarBuilder
     )
   }
 }

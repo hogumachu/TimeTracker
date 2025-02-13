@@ -13,9 +13,9 @@ let project = Project.module(
     ),
     .implements(module: .feature(.Home), dependencies: [
       .domain(target: .CalendarService, type: .interface),
+      .feature(target: .Calendar, type: .interface),
       .feature(target: .FeatureKit),
       .feature(target: .Home, type: .interface),
-      .userInterface(target: .CalendarUIKit)
     ]),
     .testing(module: .feature(.Home), dependencies: [
       .feature(target: .Home, type: .interface)

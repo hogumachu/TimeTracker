@@ -14,7 +14,9 @@ public protocol HomeDashboardListener: AnyObject {}
 
 // MARK: - HomeDashboardRouting
 
-public protocol HomeDashboardRouting: ViewableRouting {}
+public protocol HomeDashboardRouting: ViewableRouting {
+  func attachCalendar()
+}
 
 // MARK: - HomeDashboardBuildDependency
 

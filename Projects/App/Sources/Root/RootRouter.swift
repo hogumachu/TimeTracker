@@ -20,7 +20,9 @@ protocol RootInteractable:
   var listener: RootListener? { get set }
 }
 
-protocol RootViewControllable: ViewControllable {}
+protocol RootViewControllable: ViewControllable {
+  func setTabs(_ viewControllables: [ViewControllable], animated: Bool)
+}
 
 final class RootRouter:
   LaunchRouter<RootInteractable, RootViewControllable>,
@@ -48,7 +50,7 @@ final class RootRouter:
     let router = homeDashboardBuilder.build(with: .init(listener: interactor))
     homeDashboardRouting = router
     attachChild(router)
-    viewController.setViewControllers([router.viewControllable], animated: false)
+    viewController.setTabs([router.viewControllable], animated: false)
   }
     
   func attachSplash() {

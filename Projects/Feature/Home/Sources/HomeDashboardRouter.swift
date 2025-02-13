@@ -7,28 +7,46 @@
 //
 
 import RIBs
+
+import CalendarInterface
 import HomeInterface
 
 // MARK: - HomeDashboardInteractable
 
-protocol HomeDashboardInteractable: Interactable {
+protocol HomeDashboardInteractable: Interactable,
+                                    CalendarListener {
   var router: HomeDashboardRouting? { get set }
   var listener: HomeDashboardListener? { get set }
 }
 
-protocol HomeDashboardViewControllable: ViewControllable {}
+protocol HomeDashboardViewControllable: ViewControllable {
+  func setViewController(_ viewControllable: ViewControllable)
+}
 
 // MARK: - HomeDashboardRouter
 
 final class HomeDashboardRouter:
   ViewableRouter<HomeDashboardInteractable, HomeDashboardViewControllable>,
   HomeDashboardRouting {
-
-  override init(
+  
+  private let calendarBuilder: CalendarBuildable
+  private var calendarRouting: ViewableRouting?
+  
+  init(
     interactor: HomeDashboardInteractable,
-    viewController: HomeDashboardViewControllable
+    viewController: HomeDashboardViewControllable,
+    calendarBuilder: CalendarBuildable
   ) {
+    self.calendarBuilder = calendarBuilder
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
+  }
+  
+  func attachCalendar() {
+    guard calendarRouting == nil else { return }
+    let router = calendarBuilder.build(with: .init(listener: interactor))
+    calendarRouting = router
+    attachChild(router)
+    viewController.setViewController(router.viewControllable)
   }
 }

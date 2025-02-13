@@ -51,10 +51,6 @@ final class RootInteractor:
       router?.attachTabs()
     }
   }
-  
-  override func willResignActive() {
-    super.willResignActive()
-  }
 }
 
 // MARK: - Splash

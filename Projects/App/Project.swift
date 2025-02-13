@@ -27,6 +27,7 @@ let targets: [Target] = [
     resources: ["Resources/**"],
     scripts: scripts,
     dependencies: [
+      .feature(target: .Calendar),
       .feature(target: .Home),
       .feature(target: .Splash),
       .domain(target: .CalendarService),

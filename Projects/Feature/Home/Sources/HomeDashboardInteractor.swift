@@ -48,6 +48,7 @@ final class HomeDashboardInteractor:
   }
   
   private func initialized() {
+    router?.attachCalendar()
     calendarService.focusedDate
       .subscribe(with: self) { this, date in
         this.presenter.focus(on: date)

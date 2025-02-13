@@ -7,7 +7,9 @@ import ProjectDescriptionHelpers
 
 let packageSetting = PackageSettings(
   productTypes: [
-    "RIBs": .framework
+    "RIBs": .framework,
+    "FlexLayout": .framework,
+    "PinLayout": .framework
   ],
   baseSettings: .settings(
     configurations: [
