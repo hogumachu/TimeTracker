@@ -14,7 +14,10 @@ public protocol CalendarListener: AnyObject {}
 
 // MARK: - CalendarRouting
 
-public protocol CalendarRouting: ViewableRouting {}
+public protocol CalendarRouting: ViewableRouting {
+  func attachDetail()
+  func detachDetail()
+}
 
 // MARK: - CalendarBuildDependency
 

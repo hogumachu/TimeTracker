@@ -7,8 +7,10 @@
 //
 
 import Foundation
+
 import RIBs
 import RxSwift
+
 import CalendarInterface
 
 // MARK: - CalendarPresentable
@@ -38,5 +40,9 @@ final class CalendarInteractor:
   
   override func willResignActive() {
     super.willResignActive()
+  }
+  
+  func detailTapped() {
+    router?.attachDetail()
   }
 }

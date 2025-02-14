@@ -11,6 +11,7 @@ import UIKit
 open class BaseViewController: UIViewController {
   public init() {
     super.init(nibName: nil, bundle: nil)
+    view.backgroundColor = DesignSystem.BackgroundColor.base
   }
   
   @available(*, unavailable)

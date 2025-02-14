@@ -6,9 +6,10 @@
 //  Copyright © 2025 com.hogumachu. All rights reserved.
 //
 
-import AppFoundation
 import NeedleFoundation
 import RIBs
+
+import AppFoundation
 import CalendarInterface
 
 // MARK: - CalendarDependency
@@ -41,7 +42,18 @@ public final class CalendarBuilder:
     
     return CalendarRouter(
       interactor: interactor,
-      viewController: viewController
+      viewController: viewController,
+      calendarDetailBuilder: CalendarDetailBuilder {
+        component.detailComponent
+      }
     )
+  }
+}
+
+// MARK: - Child Component
+
+extension CalendarComponent {
+  var detailComponent: CalendarDetailComponent {
+    CalendarDetailComponent(parent: self)
   }
 }
