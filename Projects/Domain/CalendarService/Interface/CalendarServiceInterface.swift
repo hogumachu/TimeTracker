@@ -14,4 +14,12 @@ public protocol FocusedDateObservable: AnyObject {
   var focusedDate: Observable<Date> { get }
 }
 
-public protocol CalendarServicable: FocusedDateObservable {}
+public protocol SelectedDayObservable: AnyObject {
+  var selectedDays: Observable<ClosedRange<Date>?> { get }
+}
+
+public protocol CalendarServicable: FocusedDateObservable,
+                                    SelectedDayObservable {
+  var startDate: Observable<Date> { get }
+  var endDate: Observable<Date> { get }
+}

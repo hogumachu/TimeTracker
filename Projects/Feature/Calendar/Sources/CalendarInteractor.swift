@@ -12,6 +12,7 @@ import RIBs
 import RxSwift
 
 import CalendarInterface
+import CalendarServiceInterface
 
 // MARK: - CalendarPresentable
 
@@ -28,8 +29,14 @@ final class CalendarInteractor:
 
   weak var router: CalendarRouting?
   weak var listener: CalendarListener?
+  
+  private let calendarService: CalendarServicable
 
-  override init(presenter: CalendarPresentable) {
+  init(
+    presenter: CalendarPresentable,
+    calendarService: CalendarServicable
+  ) {
+    self.calendarService = calendarService
     super.init(presenter: presenter)
     presenter.listener = self
   }

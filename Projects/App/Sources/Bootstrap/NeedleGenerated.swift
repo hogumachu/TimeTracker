@@ -75,26 +75,30 @@ private func factoryace9f05f51d68f4c0677e3b0c44298fc1c149afb(_ component: Needle
     return SplashDependencye0cb7136f2ec3edfd60aProvider()
 }
 private class CalendarDetailDependencya192756e4ba46bd2f60bProvider: CalendarDetailDependency {
-
-
-    init() {
-
+    var focusedDateObservable: FocusedDateObservable {
+        return calendarComponent.focusedDateObservable
+    }
+    private let calendarComponent: CalendarComponent
+    init(calendarComponent: CalendarComponent) {
+        self.calendarComponent = calendarComponent
     }
 }
 /// ^->AppComponent->CalendarComponent->CalendarDetailComponent
-private func factory3694fcdcaa4d61b47357e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return CalendarDetailDependencya192756e4ba46bd2f60bProvider()
+private func factory3694fcdcaa4d61b473572de431378f774b24e14c(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return CalendarDetailDependencya192756e4ba46bd2f60bProvider(calendarComponent: parent1(component) as! CalendarComponent)
 }
 private class CalendarDependency413e3f1dda33aa6ff6aeProvider: CalendarDependency {
-
-
-    init() {
-
+    var calendarService: CalendarServicable {
+        return appComponent.calendarService
+    }
+    private let appComponent: AppComponent
+    init(appComponent: AppComponent) {
+        self.appComponent = appComponent
     }
 }
 /// ^->AppComponent->CalendarComponent
-private func factorye6390b2af02fceff6db0e3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
-    return CalendarDependency413e3f1dda33aa6ff6aeProvider()
+private func factorye6390b2af02fceff6db0f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return CalendarDependency413e3f1dda33aa6ff6aeProvider(appComponent: parent1(component) as! AppComponent)
 }
 
 #else
@@ -124,13 +128,13 @@ extension SplashComponent: NeedleFoundation.Registration {
 }
 extension CalendarDetailComponent: NeedleFoundation.Registration {
     public func registerItems() {
-
+        keyPathToName[\CalendarDetailDependency.focusedDateObservable] = "focusedDateObservable-FocusedDateObservable"
     }
 }
 extension CalendarComponent: NeedleFoundation.Registration {
     public func registerItems() {
-
-
+        keyPathToName[\CalendarDependency.calendarService] = "calendarService-CalendarServicable"
+        localTable["focusedDateObservable-FocusedDateObservable"] = { [unowned self] in self.focusedDateObservable as Any }
     }
 }
 
@@ -153,8 +157,8 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
     registerProviderFactory("^->AppComponent->RootComponent", factory264bfc4d4cb6b0629b40f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->HomeDashboardComponent", factory1b289746fa6e3ba53918f47b58f8f304c97af4d5)
     registerProviderFactory("^->AppComponent->SplashComponent", factoryace9f05f51d68f4c0677e3b0c44298fc1c149afb)
-    registerProviderFactory("^->AppComponent->CalendarComponent->CalendarDetailComponent", factory3694fcdcaa4d61b47357e3b0c44298fc1c149afb)
-    registerProviderFactory("^->AppComponent->CalendarComponent", factorye6390b2af02fceff6db0e3b0c44298fc1c149afb)
+    registerProviderFactory("^->AppComponent->CalendarComponent->CalendarDetailComponent", factory3694fcdcaa4d61b473572de431378f774b24e14c)
+    registerProviderFactory("^->AppComponent->CalendarComponent", factorye6390b2af02fceff6db0f47b58f8f304c97af4d5)
 }
 #endif
 

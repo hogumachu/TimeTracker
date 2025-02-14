@@ -11,10 +11,13 @@ import RIBs
 
 import AppFoundation
 import CalendarInterface
+import CalendarServiceInterface
 
 // MARK: - CalendarDependency
 
-public protocol CalendarDependency: NeedleFoundation.Dependency {}
+public protocol CalendarDependency: NeedleFoundation.Dependency {
+  var calendarService: CalendarServicable { get }
+}
 
 // MARK: - DynamicComponentDependency
 
@@ -36,7 +39,8 @@ public final class CalendarBuilder:
   ) -> CalendarRouting {
     let viewController = CalendarViewController()
     let interactor = CalendarInteractor(
-      presenter: viewController
+      presenter: viewController,
+      calendarService: component.calendarService
     )
     interactor.listener = payload.listener
     
