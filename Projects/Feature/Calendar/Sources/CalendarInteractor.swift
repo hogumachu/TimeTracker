@@ -42,7 +42,7 @@ final class CalendarInteractor:
     super.willResignActive()
   }
   
-  func detailTapped() {
-    router?.attachDetail()
+  func didSelected(at indexPath: IndexPath) {
+    
   }
 }

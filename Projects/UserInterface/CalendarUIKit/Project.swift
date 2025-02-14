@@ -10,7 +10,8 @@ let project = Project.module(
       product: .framework,
       dependencies: [
         .shared(target: .Platform),
-        .userInterface(target: .DesignSystem)
+        .userInterface(target: .DesignSystem),
+        .SPM.HorizonCalendar
       ]
     ),
     .demo(module: .userInterface(.CalendarUIKit), dependencies: [

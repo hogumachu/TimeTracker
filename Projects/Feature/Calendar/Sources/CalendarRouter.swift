@@ -17,7 +17,9 @@ protocol CalendarInteractable: Interactable, CalendarDetailListener {
   var listener: CalendarListener? { get set }
 }
 
-protocol CalendarViewControllable: ViewControllable {}
+protocol CalendarViewControllable: ViewControllable {
+  func presentWithCustomTransition(_ viewControllable: ViewControllable)
+}
 
 // MARK: - CalendarRouter
 
@@ -48,7 +50,7 @@ extension CalendarRouter {
     let router = calendarDetailBuilder.build(with: .init(listener: interactor))
     calendarDetailRouting = router
     attachChild(router)
-    viewController.pushViewController(router.viewControllable)
+    viewController.presentWithCustomTransition(router.viewControllable)
   }
   
   func detachDetail() {

@@ -9,7 +9,8 @@ let project = Project.module(
       module: .shared(.Platform),
       product: .framework,
       dependencies: [
-        .domain(target: .Entity)
+        .domain(target: .Entity),
+        .SPM.SwiftDate
       ]
     ),
     .tests(module: .shared(.Platform), dependencies: [

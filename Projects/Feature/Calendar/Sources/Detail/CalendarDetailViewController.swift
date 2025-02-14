@@ -11,6 +11,7 @@ import UIKit
 import RIBs
 import RxSwift
 
+import CalendarUIKit
 import DesignSystem
 
 protocol CalendarDetailPresentableListener: AnyObject {}
@@ -22,4 +23,14 @@ final class CalendarDetailViewController:
   
   weak var listener: CalendarDetailPresentableListener?
   
+  private let contentView = CalendarDetailView()
+  
+  override func loadView() {
+    view = contentView
+  }
+  
+}
+
+extension CalendarDetailViewController: CalendarTransitionable {
+  var sharedView: UIView? { contentView }
 }
