@@ -1,8 +1,9 @@
 //___FILEHEADER___
 
-import AppFoundation
 import NeedleFoundation
 import RIBs
+
+import AppFoundation
 import ___VARIABLE_productName___Interface
 
 // MARK: - ___VARIABLE_productName___Dependency
@@ -20,14 +21,8 @@ public final class ___VARIABLE_productName___Component: NeedleFoundation.Compone
 // MARK: - ___VARIABLE_productName___Builder
 
 public final class ___VARIABLE_productName___Builder:
-  ComponentizedBuilder<
-___VARIABLE_productName___Component,
-___VARIABLE_productName___Routing,
-___VARIABLE_productName___BuildDependency,
-___VARIABLE_productName___ComponentDepenency
->,
-___VARIABLE_productName___Buildable
-{
+  ComponentizedBuilder<___VARIABLE_productName___Component, ___VARIABLE_productName___Routing, ___VARIABLE_productName___BuildDependency, ___VARIABLE_productName___ComponentDepenency>,
+  ___VARIABLE_productName___Buildable {
   
   override public func build(
     with component: ___VARIABLE_productName___Component,

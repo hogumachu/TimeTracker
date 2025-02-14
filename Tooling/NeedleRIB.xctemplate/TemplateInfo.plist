@@ -31,9 +31,9 @@
 			<key>Required</key>
 			<string>true</string>
 			<key>Name</key>
-			<string>RIB name:</string>
+			<string>NeedleRIB name:</string>
 			<key>Description</key>
-			<string>The name of the RIB to create</string>
+			<string>The name of the NeedleRIB to create</string>
 			<key>Type</key>
 			<string>text</string>
 			<key>NotPersisted</key>

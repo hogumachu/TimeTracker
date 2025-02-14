@@ -1,8 +1,10 @@
 //___FILEHEADER___
 
 import Foundation
+
 import RIBs
 import RxSwift
+
 import ___VARIABLE_productName___Interface
 
 // MARK: - ___VARIABLE_productName___Presentable
@@ -16,8 +18,7 @@ protocol ___VARIABLE_productName___Presentable: Presentable {
 final class ___VARIABLE_productName___Interactor:
   PresentableInteractor<___VARIABLE_productName___Presentable>,
   ___VARIABLE_productName___Interactable,
-  ___VARIABLE_productName___PresentableListener
-{
+  ___VARIABLE_productName___PresentableListener {
   
   weak var router: ___VARIABLE_productName___Routing?
   weak var listener: ___VARIABLE_productName___Listener?

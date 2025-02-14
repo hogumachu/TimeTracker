@@ -1,6 +1,7 @@
 //___FILEHEADER___
 
 import RIBs
+
 import ___VARIABLE_productName___Interface
 
 // MARK: - ___VARIABLE_productName___Interactable
@@ -15,12 +16,8 @@ protocol ___VARIABLE_productName___ViewControllable: ViewControllable {}
 // MARK: - ___VARIABLE_productName___Router
 
 final class ___VARIABLE_productName___Router:
-  ViewableRouter<
-___VARIABLE_productName___Interactable,
-___VARIABLE_productName___ViewControllable
->,
-___VARIABLE_productName___Routing
-{
+  ViewableRouter<___VARIABLE_productName___Interactable, ___VARIABLE_productName___ViewControllable>,
+  ___VARIABLE_productName___Routing {
   
   override init(
     interactor: ___VARIABLE_productName___Interactable,
