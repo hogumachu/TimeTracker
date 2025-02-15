@@ -24,10 +24,11 @@ extension ModulePaths: MicroTargetPathConvertable {
 
 public extension ModulePaths {
   enum Feature: String, MicroTargetPathConvertable {
+    case FeatureFoundation
     case Calendar
     case Home
     case Splash
-    case FeatureKit
+    case FeatureUIKit
   }
 }
 
@@ -54,7 +55,6 @@ public extension ModulePaths {
 
 public extension ModulePaths {
   enum UserInterface: String, MicroTargetPathConvertable {
-    case CalendarUIKit
     case DesignSystem
   }
 }

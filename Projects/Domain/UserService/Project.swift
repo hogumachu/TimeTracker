@@ -9,7 +9,6 @@ let project = Project.module(
       module: .domain(.UserService),
       dependencies: [
         .shared(target: .Platform),
-        .SPM.RxSwift
       ]
     ),
     .implements(

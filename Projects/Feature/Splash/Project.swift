@@ -8,12 +8,12 @@ let project = Project.module(
     .interface(
       module: .feature(.Splash),
       dependencies: [
-        .SPM.RIBs
+        .feature(target: .FeatureFoundation),
       ]
     ),
-    .implements(module: .feature(.Splash), dependencies: [
+    .implementsWithNeedleScript(module: .feature(.Splash), dependencies: [
       .feature(target: .Splash, type: .interface),
-      .feature(target: .FeatureKit)
+      .feature(target: .FeatureUIKit)
     ]),
     .testing(module: .feature(.Splash), dependencies: [
       .feature(target: .Splash, type: .interface)

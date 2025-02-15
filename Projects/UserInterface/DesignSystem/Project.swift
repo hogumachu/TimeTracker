@@ -13,7 +13,8 @@ let project = Project.module(
         resources: .resources(["Resources/**"]),
         dependencies: [
           .SPM.FlexLayout,
-          .SPM.PinLayout
+          .SPM.PinLayout,
+          .SPM.HorizonCalendar
         ]
       )
     ),

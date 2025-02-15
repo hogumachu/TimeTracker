@@ -3,14 +3,13 @@ import DependencyPlugin
 import ProjectDescriptionHelpers
 
 let project = Project.module(
-  name: ModulePaths.Feature.FeatureKit.rawValue,
+  name: ModulePaths.Feature.FeatureUIKit.rawValue,
   targets: [
     .implements(
-      module: .feature(.FeatureKit),
-      product: .framework,
+      module: .feature(.FeatureUIKit),
+//      product: .framework,
       dependencies: [
-        .shared(target: .AppFoundation),
-        .shared(target: .Platform),
+        .feature(target: .FeatureFoundation),
         .userInterface(target: .DesignSystem),
         .SPM.Needle,
         .SPM.RxCocoa

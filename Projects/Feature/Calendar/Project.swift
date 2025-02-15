@@ -8,14 +8,13 @@ let project = Project.module(
     .interface(
       module: .feature(.Calendar),
       dependencies: [
-        .SPM.RIBs
+        .feature(target: .FeatureFoundation),
       ]
     ),
-    .implements(module: .feature(.Calendar), dependencies: [
+    .implementsWithNeedleScript(module: .feature(.Calendar), dependencies: [
       .domain(target: .CalendarService, type: .interface),
       .feature(target: .Calendar, type: .interface),
-      .feature(target: .FeatureKit),
-      .userInterface(target: .CalendarUIKit)
+      .feature(target: .FeatureUIKit),
     ]),
     .testing(module: .feature(.Calendar), dependencies: [
       .feature(target: .Calendar, type: .interface)

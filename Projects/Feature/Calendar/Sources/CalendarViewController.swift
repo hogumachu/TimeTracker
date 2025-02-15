@@ -12,7 +12,6 @@ import RIBs
 import RxSwift
 import RxCocoa
 
-import CalendarUIKit
 import DesignSystem
 
 protocol CalendarPresentableListener: AnyObject {

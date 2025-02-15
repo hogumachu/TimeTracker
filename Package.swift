@@ -11,7 +11,8 @@ let packageSetting = PackageSettings(
     "HorizonCalendar": .framework,
     "PinLayout": .framework,
     "RIBs": .framework,
-    "SwiftDate": .framework
+    "SwiftDate": .framework,
+    "RxRelay": .framework,
   ],
   baseSettings: .settings(
     configurations: [

@@ -40,14 +40,6 @@ final class CalendarInteractor:
     super.init(presenter: presenter)
     presenter.listener = self
   }
-
-  override func didBecomeActive() {
-    super.didBecomeActive()
-  }
-  
-  override func willResignActive() {
-    super.willResignActive()
-  }
   
   func didSelected(at indexPath: IndexPath) {
     

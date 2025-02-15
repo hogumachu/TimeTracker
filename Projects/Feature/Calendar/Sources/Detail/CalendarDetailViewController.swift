@@ -11,7 +11,6 @@ import UIKit
 import RIBs
 import RxSwift
 
-import CalendarUIKit
 import DesignSystem
 
 protocol CalendarDetailPresentableListener: AnyObject {}

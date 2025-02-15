@@ -10,6 +10,7 @@ let project = Project.module(
       product: .framework,
       dependencies: [
         .domain(target: .Entity),
+        .shared(target: .AppFoundation),
         .SPM.SwiftDate
       ]
     ),

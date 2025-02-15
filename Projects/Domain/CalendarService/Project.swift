@@ -9,7 +9,6 @@ let project = Project.module(
       module: .domain(.CalendarService),
       dependencies: [
         .shared(target: .Platform),
-        .SPM.RxSwift
       ]
     ),
     .implements(module: .domain(.CalendarService), dependencies: [

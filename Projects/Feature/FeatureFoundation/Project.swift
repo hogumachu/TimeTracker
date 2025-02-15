@@ -3,16 +3,13 @@ import DependencyPlugin
 import ProjectDescriptionHelpers
 
 let project = Project.module(
-  name: ModulePaths.Shared.AppFoundation.rawValue,
+  name: ModulePaths.Feature.FeatureFoundation.rawValue,
   targets: [
     .implements(
-      module: .shared(
-        .AppFoundation
-      ),
+      module: .feature(.FeatureFoundation),
 //      product: .framework,
       dependencies: [
-        .SPM.RIBs,
-        .SPM.Then
+        .shared(target: .Platform),
       ]
     )
   ]
