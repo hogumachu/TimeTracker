@@ -10,6 +10,7 @@ import Foundation
 
 import RIBs
 import RxSwift
+import SwiftDate
 
 import CalendarInterface
 import CalendarServiceInterface
@@ -30,6 +31,9 @@ final class CalendarInteractor:
   weak var router: CalendarRouting?
   weak var listener: CalendarListener?
   
+  private(set) var startDate: Date = .now
+  private(set) var endDate: Date = .now
+  
   private let calendarService: CalendarServicable
 
   init(
@@ -41,7 +45,23 @@ final class CalendarInteractor:
     presenter.listener = self
   }
   
-  func didSelected(at indexPath: IndexPath) {
+  func didSelectHeader() {
+    
+  }
+  
+  func didSelectSearch() {
+    
+  }
+  
+  func didSelectNotification() {
+    
+  }
+  
+  func didSelect(date: Date, indexPath: IndexPath) {
+    
+  }
+  
+  func willDisplay(date: Date, indexPath: IndexPath) {
     
   }
 }
