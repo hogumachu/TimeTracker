@@ -26,7 +26,7 @@ final class CalendarViewController:
   weak var listener: CalendarPresentableListener?
   
   private lazy var transition = CalendarTransition(from: self)
-  private let contentView = CalendarViewProvider.makeHorizontalCalendarView()
+  private let contentView = UIView()
   private var selectedView: UIView?
   private let disposeBag = DisposeBag()
   
