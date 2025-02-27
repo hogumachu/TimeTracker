@@ -8,7 +8,7 @@ import ProjectDescriptionHelpers
 let packageSetting = PackageSettings(
   productTypes: [
     "FlexLayout": .framework,
-    "HorizonCalendar": .framework,
+    "JTAppleCalendar": .framework,
     "PinLayout": .framework,
     "RIBs": .framework,
     "SwiftDate": .framework,
@@ -27,8 +27,8 @@ let packageSetting = PackageSettings(
 let package = Package(
   name: "Package",
   dependencies: [
+    .package(url: "https://github.com/patchthecode/JTAppleCalendar", from: "8.0.5"),
     .package(url: "https://github.com/malcommac/SwiftDate", from: "7.0.0"),
-    .package(url: "https://github.com/airbnb/HorizonCalendar", from: "2.0.0"),
     .package(url: "https://github.com/devxoul/Then", from: "3.0.0"),
     .package(url: "https://github.com/uber/needle", from: "0.25.1"),
     .package(url: "https://github.com/ReactiveX/RxSwift", from: "6.8.0"),

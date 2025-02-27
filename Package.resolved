@@ -10,12 +10,12 @@
       }
     },
     {
-      "identity" : "horizoncalendar",
+      "identity" : "jtapplecalendar",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/airbnb/HorizonCalendar",
+      "location" : "https://github.com/patchthecode/JTAppleCalendar",
       "state" : {
-        "revision" : "a360d71a1255f0b24e378f2ee31a7a7d674a49b6",
-        "version" : "2.0.0"
+        "revision" : "718f0ab68ba0fcd2bc134f6e9d30edc1b9b038e1",
+        "version" : "8.0.5"
       }
     },
     {
