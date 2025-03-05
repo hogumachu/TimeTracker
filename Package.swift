@@ -7,9 +7,9 @@ import ProjectDescriptionHelpers
 
 let packageSetting = PackageSettings(
   productTypes: [
-    "FlexLayout": .framework,
+//    "FlexLayout": .framework,
     "JTAppleCalendar": .framework,
-    "PinLayout": .framework,
+//    "PinLayout": .framework,
     "RIBs": .framework,
     "SwiftDate": .framework,
     "RxRelay": .framework,
