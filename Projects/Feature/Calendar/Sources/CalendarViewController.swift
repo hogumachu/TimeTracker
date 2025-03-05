@@ -66,6 +66,15 @@ final class CalendarViewController:
     viewController.modalPresentationStyle = .overFullScreen
     present(viewController, animated: true)
   }
+  
+  func dateUpdated() {
+    /// reloadData 확인할 것들이 있음
+    ///
+    /// - 해당 메서드 호출 시 `ConfigurationParameters`를 다시 설정하지 않음
+    /// - `ConfigurationParameters`를 다시 설정하기 위해서는 `DataSource`를 다시 설정해야 함
+    /// - 시작 날짜와 끝 날짜가 변경되었을 때 업데이트 하는 방식 확인 필요
+    contentView.monthView.reloadData()
+  }
 }
 
 extension CalendarViewController: CalendarTransitioning {

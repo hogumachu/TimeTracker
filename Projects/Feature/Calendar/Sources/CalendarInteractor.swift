@@ -19,6 +19,7 @@ import CalendarServiceInterface
 
 protocol CalendarPresentable: Presentable {
   var listener: CalendarPresentableListener? { get set }
+  func dateUpdated()
 }
 
 // MARK: - CalendarInteractor
@@ -31,6 +32,7 @@ final class CalendarInteractor:
   weak var router: CalendarRouting?
   weak var listener: CalendarListener?
   
+  // TODO: - raw value vs. observable
   private(set) var startDate: Date = .now
   private(set) var endDate: Date = .now
   
@@ -43,6 +45,11 @@ final class CalendarInteractor:
     self.calendarService = calendarService
     super.init(presenter: presenter)
     presenter.listener = self
+  }
+  
+  override func didBecomeActive() {
+    super.didBecomeActive()
+    initialized()
   }
   
   func didSelectHeader() {
@@ -63,5 +70,25 @@ final class CalendarInteractor:
   
   func willDisplay(date: Date, indexPath: IndexPath) {
     
+  }
+  
+  private func initialized() {
+    calendarService.startDate
+      .subscribe(with: self) { this, startDate in
+        this.startDate = startDate
+        this.dateUpdated()
+      }
+      .disposeOnDeactivate(interactor: self)
+    
+    calendarService.endDate
+      .subscribe(with: self) { this, endDate in
+        this.endDate = endDate
+        this.dateUpdated()
+      }
+      .disposeOnDeactivate(interactor: self)
+  }
+  
+  private func dateUpdated() {
+    presenter.dateUpdated()
   }
 }
