@@ -35,7 +35,12 @@ open class CalendarView: BaseView {
     didSet { monthView.calendarDataSource = dataSource }
   }
   
-  public let monthView = JTACMonthView()
+  public let monthView = JTACMonthView().with {
+    $0.scrollDirection = .horizontal
+    $0.scrollingMode = .stopAtEachSection
+    $0.showsVerticalScrollIndicator = false
+    $0.showsHorizontalScrollIndicator = false
+  }
   
   // MARK: - Internal properties
   
@@ -50,13 +55,15 @@ open class CalendarView: BaseView {
     rootView.flex
       .define {
         $0.addItem(headerView)
+          .height(10%)
         $0.addItem(monthView)
+          .height(90%)
       }
   }
   
   open override func layoutSubviews() {
     super.layoutSubviews()
-    rootView.pin.all()
+    rootView.pin.all(pin.safeArea)
     rootView.flex.layout()
   }
 }
