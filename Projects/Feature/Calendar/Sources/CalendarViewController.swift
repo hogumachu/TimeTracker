@@ -15,11 +15,13 @@ import RxCocoa
 import Then
 
 import DesignSystem
+import Entity
 import FeatureUIKit
 
 protocol CalendarPresentableListener: AnyObject {
   var startDate: Date { get }
   var endDate: Date { get }
+  func model(at indexPath: IndexPath) -> CalendarDayModel?
   func didSelectHeader()
   func didSelectSearch()
   func didSelectNotification()
@@ -97,10 +99,17 @@ extension CalendarViewController: CalendarViewDelegate {
   
   func calendar(_ calendar: JTACMonthView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTACDayCell {
     let cell = calendar.dequeueCell(type: CalendarDayCell.self, for: indexPath)
+    guard let model = listener?.model(at: indexPath) else {
+      return cell
+    }
+    cell.configure(model.cellModel)
     return cell
   }
   
   func calendar(_ calendar: JTACMonthView, willDisplay cell: JTACDayCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
+    let cell = calendar.dequeueCell(type: CalendarDayCell.self, for: indexPath)
+    guard let model = listener?.model(at: indexPath) else { return }
+    cell.configure(model.cellModel)
     listener?.willDisplay(date: date, indexPath: indexPath)
   }
   

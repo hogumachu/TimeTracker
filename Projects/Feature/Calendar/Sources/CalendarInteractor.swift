@@ -14,6 +14,8 @@ import SwiftDate
 
 import CalendarInterface
 import CalendarServiceInterface
+import Entity
+import Platform
 
 // MARK: - CalendarPresentable
 
@@ -33,8 +35,9 @@ final class CalendarInteractor:
   weak var listener: CalendarListener?
   
   // TODO: - raw value vs. observable
-  private(set) var startDate: Date = .now
-  private(set) var endDate: Date = .now
+  private(set) var startDate: Date = .now.addingTimeInterval(-360000000)
+  private(set) var endDate: Date = .now.addingTimeInterval(360000000)
+  private var models: [CalendarDayModel] = []
   
   private let calendarService: CalendarServicable
 
@@ -50,6 +53,10 @@ final class CalendarInteractor:
   override func didBecomeActive() {
     super.didBecomeActive()
     initialized()
+  }
+  
+  func model(at indexPath: IndexPath) -> CalendarDayModel? {
+    return models[safe: indexPath.row]
   }
   
   func didSelectHeader() {
