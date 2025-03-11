@@ -18,6 +18,8 @@ import Home
 import HomeInterface
 import Splash
 import SplashInterface
+import Todo
+import TodoInterface
 import UserService
 import UserServiceInterface
 
@@ -57,6 +59,16 @@ extension AppComponent {
   var homeDashboardBuilder: HomeDashboardBuildable {
     HomeDashboardBuilder {
       HomeDashboardComponent(parent: self)
+    }
+  }
+}
+
+// MARK: - TodoDashboard
+
+extension AppComponent {
+  var todoDashboardBuilder: TodoDashboardBuildable {
+    TodoDashboardBuilder {
+      TodoDashboardComponent(parent: self)
     }
   }
 }

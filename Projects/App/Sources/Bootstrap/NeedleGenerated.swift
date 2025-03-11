@@ -12,6 +12,8 @@ import NeedleFoundation
 import RIBs
 import Splash
 import SplashInterface
+import Todo
+import TodoInterface
 import UserService
 import UserServiceInterface
 
@@ -34,6 +36,9 @@ private class RootDependency3944cc797a4a88956fb5Provider: RootDependency {
     }
     var homeDashboardBuilder: HomeDashboardBuildable {
         return appComponent.homeDashboardBuilder
+    }
+    var todoDashboardBuilder: TodoDashboardBuildable {
+        return appComponent.todoDashboardBuilder
     }
     var splashBuilder: SplashBuildable {
         return appComponent.splashBuilder
@@ -98,6 +103,17 @@ private class CalendarDependency413e3f1dda33aa6ff6aeProvider: CalendarDependency
 private func factorye6390b2af02fceff6db0f47b58f8f304c97af4d5(_ component: NeedleFoundation.Scope) -> AnyObject {
     return CalendarDependency413e3f1dda33aa6ff6aeProvider(appComponent: parent1(component) as! AppComponent)
 }
+private class TodoDashboardDependency7e322d6e8e1a8e144e0fProvider: TodoDashboardDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->TodoDashboardComponent
+private func factorye1c42f64761e7af03b0ee3b0c44298fc1c149afb(_ component: NeedleFoundation.Scope) -> AnyObject {
+    return TodoDashboardDependency7e322d6e8e1a8e144e0fProvider()
+}
 
 #else
 extension AppComponent: NeedleFoundation.Registration {
@@ -110,6 +126,7 @@ extension RootComponent: NeedleFoundation.Registration {
     public func registerItems() {
         keyPathToName[\RootDependency.userService] = "userService-UserServicable"
         keyPathToName[\RootDependency.homeDashboardBuilder] = "homeDashboardBuilder-HomeDashboardBuildable"
+        keyPathToName[\RootDependency.todoDashboardBuilder] = "todoDashboardBuilder-TodoDashboardBuildable"
         keyPathToName[\RootDependency.splashBuilder] = "splashBuilder-SplashBuildable"
     }
 }
@@ -135,6 +152,11 @@ extension CalendarComponent: NeedleFoundation.Registration {
 
     }
 }
+extension TodoDashboardComponent: NeedleFoundation.Registration {
+    public func registerItems() {
+
+    }
+}
 
 
 #endif
@@ -157,6 +179,7 @@ private func registerProviderFactory(_ componentPath: String, _ factory: @escapi
     registerProviderFactory("^->AppComponent->SplashComponent", factoryace9f05f51d68f4c0677e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->CalendarComponent->CalendarDetailComponent", factory3694fcdcaa4d61b47357e3b0c44298fc1c149afb)
     registerProviderFactory("^->AppComponent->CalendarComponent", factorye6390b2af02fceff6db0f47b58f8f304c97af4d5)
+    registerProviderFactory("^->AppComponent->TodoDashboardComponent", factorye1c42f64761e7af03b0ee3b0c44298fc1c149afb)
 }
 #endif
 

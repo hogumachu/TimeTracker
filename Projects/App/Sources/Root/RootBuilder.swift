@@ -12,11 +12,13 @@ import RIBs
 import AppFoundation
 import HomeInterface
 import SplashInterface
+import TodoInterface
 import UserServiceInterface
 
 protocol RootDependency: NeedleFoundation.Dependency {
   var userService: UserServicable { get }
   var homeDashboardBuilder: HomeDashboardBuildable { get }
+  var todoDashboardBuilder: TodoDashboardBuildable { get }
   var splashBuilder: SplashBuildable { get }
 }
 
@@ -40,6 +42,7 @@ final class RootBuilder: ComponentizedBuilder<RootComponent, LaunchRouting, Void
       interactor: interactor,
       viewController: viewController,
       homeDashboardBuilder: component.homeDashboardBuilder,
+      todoDashboardBuilder: component.todoDashboardBuilder,
       splashBuilder: component.splashBuilder
     )
     return router

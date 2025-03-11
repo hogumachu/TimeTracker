@@ -29,6 +29,7 @@ let targets: [Target] = [
     dependencies: [
       .feature(target: .Calendar),
       .feature(target: .Home),
+      .feature(target: .Todo),
       .feature(target: .Splash),
       .domain(target: .CalendarService),
       .domain(target: .UserService),
