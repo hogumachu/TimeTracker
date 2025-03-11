@@ -19,8 +19,8 @@ import Entity
 import FeatureUIKit
 
 protocol CalendarPresentableListener: AnyObject {
-  var startDate: Date { get }
-  var endDate: Date { get }
+  var startDate: Date? { get }
+  var endDate: Date? { get }
   var monthTitle: Observable<String> { get }
   func model(at indexPath: IndexPath) -> CalendarDayModel?
   func didSelectHeader()
@@ -93,6 +93,10 @@ final class CalendarViewController:
     /// - `ConfigurationParameters`를 다시 설정하기 위해서는 `DataSource`를 다시 설정해야 함
     /// - 시작 날짜와 끝 날짜가 변경되었을 때 업데이트 하는 방식 확인 필요
     contentView.reloadData()
+  }
+  
+  func scrollToDate(_ date: Date, animated: Bool) {
+    contentView.scrollToDate(date, animated: animated)
   }
 }
 

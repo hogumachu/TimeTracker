@@ -12,6 +12,7 @@ import SwiftDate
 import RxSwift
 
 import CalendarServiceInterface
+import Entity
 
 public final class CalendarService: CalendarServicable {
   
@@ -27,9 +28,13 @@ public final class CalendarService: CalendarServicable {
   public var endDate: Observable<Date> { _endDate.asObservable() }
   private let _endDate: BehaviorSubject<Date>
   
+  public var items: Observable<[CalendarDayItem]> { _items.asObservable() }
+  private let _items: BehaviorSubject<[CalendarDayItem]>
+  
   public init(focusedDate: Date) {
     _focusedDate = .init(value: focusedDate)
     _startDate = .init(value: focusedDate - 1.years)
     _endDate = .init(value: focusedDate + 1.years)
+    _items = .init(value: [])
   }
 }

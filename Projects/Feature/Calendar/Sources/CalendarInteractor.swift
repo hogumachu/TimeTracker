@@ -22,6 +22,7 @@ import Platform
 protocol CalendarPresentable: Presentable {
   var listener: CalendarPresentableListener? { get set }
   func dateUpdated()
+  func scrollToDate(_ date: Date, animated: Bool)
 }
 
 // MARK: - CalendarInteractor
@@ -37,8 +38,8 @@ final class CalendarInteractor:
   var monthTitle: Observable<String> { monthTitleSubject.asObservable() }
   
   // TODO: - raw value vs. observable
-  private(set) var startDate: Date = .now.addingTimeInterval(-360000000)
-  private(set) var endDate: Date = .now.addingTimeInterval(360000000)
+  private(set) var startDate: Date?
+  private(set) var endDate: Date?
   private var models: [CalendarDayModel] = []
   private let monthTitleSubject = BehaviorSubject<String>(value: "")
   
@@ -84,6 +85,12 @@ final class CalendarInteractor:
   }
   
   private func initialized() {
+    calendarService.focusedDate
+      .subscribe(with: self) { this, date in
+        this.presenter.scrollToDate(date, animated: false)
+      }
+      .disposeOnDeactivate(interactor: self)
+    
     calendarService.startDate
       .subscribe(with: self) { this, startDate in
         this.startDate = startDate
@@ -95,6 +102,12 @@ final class CalendarInteractor:
       .subscribe(with: self) { this, endDate in
         this.endDate = endDate
         this.dateUpdated()
+      }
+      .disposeOnDeactivate(interactor: self)
+    
+    calendarService.items
+      .subscribe(with: self) { this, items in
+        this.models = items.map { .init(item: $0, isSelected: false) }
       }
       .disposeOnDeactivate(interactor: self)
   }

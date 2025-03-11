@@ -68,6 +68,10 @@ final class CalendarMonthView: BaseView {
     headerView.configure(title)
   }
   
+  func scrollToDate(_ date: Date, animated: Bool) {
+    contentView.scrollToDate(date, animateScroll: animated)
+  }
+  
   override func layoutSubviews() {
     super.layoutSubviews()
     containerView.pin.all()

@@ -10,6 +10,8 @@ import Foundation
 
 import RxSwift
 
+import Entity
+
 public protocol FocusedDateObservable: AnyObject {
   var focusedDate: Observable<Date> { get }
 }
@@ -22,4 +24,5 @@ public protocol CalendarServicable: FocusedDateObservable,
                                     SelectedDayObservable {
   var startDate: Observable<Date> { get }
   var endDate: Observable<Date> { get }
+  var items: Observable<[CalendarDayItem]> { get }
 }
