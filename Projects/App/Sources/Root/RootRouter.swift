@@ -11,10 +11,12 @@ import RIBs
 import AppFoundation
 import HomeInterface
 import SplashInterface
+import TodoInterface
 
 protocol RootInteractable:
   Interactable,
   HomeDashboardListener,
+  TodoDashboardListener,
   SplashListener {
   var router: RootRouting? { get set }
   var listener: RootListener? { get set }
@@ -30,6 +32,8 @@ final class RootRouter:
   
   private let homeDashboardBuilder: HomeDashboardBuildable
   private var homeDashboardRouting: ViewableRouting?
+  private let todoDashboardBuilder: TodoDashboardBuildable
+  private var todoDashboardRouting: ViewableRouting?
   private let splashBuilder: SplashBuildable
   private var splashRouting: ViewableRouting?
   
@@ -37,22 +41,32 @@ final class RootRouter:
     interactor: RootInteractable,
     viewController: RootViewControllable,
     homeDashboardBuilder: HomeDashboardBuildable,
+    todoDashboardBuilder: TodoDashboardBuildable,
     splashBuilder: SplashBuildable
   ) {
     self.homeDashboardBuilder = homeDashboardBuilder
+    self.todoDashboardBuilder = todoDashboardBuilder
     self.splashBuilder = splashBuilder
     super.init(interactor: interactor, viewController: viewController)
     interactor.router = self
   }
   
   func attachTabs() {
-    guard homeDashboardRouting == nil else { return }
-    let router = homeDashboardBuilder.build(with: .init(listener: interactor))
-    homeDashboardRouting = router
-    attachChild(router)
+    guard homeDashboardRouting == nil,
+          todoDashboardRouting == nil
+    else { return }
+    let homeRouter = homeDashboardBuilder.build(with: .init(listener: interactor))
+    homeDashboardRouting = homeRouter
+    attachChild(homeRouter)
+    
+    let todoRouter = todoDashboardBuilder.build(with: .init(listener: interactor))
+    todoDashboardRouting = todoRouter
+    attachChild(todoRouter)
+    
     viewController.setTabs(
       [
-        NavigationControllable(viewControllable: router.viewControllable)
+        NavigationControllable(viewControllable: homeRouter.viewControllable),
+        NavigationControllable(viewControllable: todoRouter.viewControllable),
       ],
       animated: false
     )

@@ -7,6 +7,7 @@ import HomeInterface
 import NeedleFoundation
 import RIBs
 import SplashInterface
+import TodoInterface
 
 // swiftlint:disable unused_declaration
 private let needleDependenciesHash : String? = nil
