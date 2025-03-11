@@ -1,21 +1,21 @@
 //
 //  CalendarDayCell.swift
-//  DesignSystem
+//  Calendar
 //
-//  Created by 홍성준 on 2/27/25.
+//  Created by 홍성준 on 3/11/25.
 //  Copyright © 2025 com.hogumachu. All rights reserved.
 //
 
 import UIKit
 
-import Entity
+import DesignSystem
 
 import FlexLayout
 import JTAppleCalendar
 import PinLayout
 import Then
 
-public struct CalendarDayCellModel: Equatable {
+struct CalendarDayCellModel: Equatable {
   public let day: Int
   public let date: Date
   public let isSelected: Bool
@@ -29,14 +29,15 @@ public struct CalendarDayCellModel: Equatable {
   }
 }
 
-open class CalendarDayCell: JTACDayCell {
+final class CalendarDayCell: JTACDayCell {
   
   private let dayLabel = UILabel().with {
     $0.font = DesignSystem.Typography.caption1
     $0.textColor = DesignSystem.TextColor.primary
+    $0.textAlignment = .center
   }
   
-  public override init(frame: CGRect) {
+  override init(frame: CGRect) {
     super.init(frame: frame)
     setupLayout()
   }
@@ -46,7 +47,7 @@ open class CalendarDayCell: JTACDayCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  open override func prepareForReuse() {
+  override func prepareForReuse() {
     super.prepareForReuse()
     dayLabel.do {
       $0.text = ""
@@ -55,12 +56,11 @@ open class CalendarDayCell: JTACDayCell {
     }
   }
   
-  open func configure(_ model: CalendarDayCellModel) {
+  func configure(_ model: CalendarDayCellModel) {
     dayLabel.do {
       $0.text = "\(model.day)"
       $0.flex.markDirty()
     }
-    
     setNeedsLayout()
   }
   
@@ -74,12 +74,12 @@ open class CalendarDayCell: JTACDayCell {
       }
   }
     
-  open override func layoutSubviews() {
+  override func layoutSubviews() {
     super.layoutSubviews()
     contentView.flex.layout(mode: .adjustHeight)
   }
   
-  open override func sizeThatFits(_ size: CGSize) -> CGSize {
+  override func sizeThatFits(_ size: CGSize) -> CGSize {
     contentView.pin.width(size.width)
     contentView.flex.layout(mode: .adjustHeight)
     return contentView.frame.size

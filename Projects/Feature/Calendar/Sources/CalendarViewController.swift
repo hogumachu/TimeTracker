@@ -21,6 +21,7 @@ import FeatureUIKit
 protocol CalendarPresentableListener: AnyObject {
   var startDate: Date { get }
   var endDate: Date { get }
+  var monthTitle: Observable<String> { get }
   func model(at indexPath: IndexPath) -> CalendarDayModel?
   func didSelectHeader()
   func didSelectSearch()
@@ -34,13 +35,15 @@ final class CalendarViewController:
   CalendarPresentable,
   CalendarViewControllable {
   
-  weak var listener: CalendarPresentableListener?
-  
-  private lazy var contentView = CalendarView().then {
-    $0.monthView.register(CalendarDayCell.self)
-    $0.delegate = self
-    $0.dataSource = self
+  weak var listener: CalendarPresentableListener? {
+    didSet { bind() }
   }
+  
+  private lazy var contentView = CalendarMonthView().with {
+    $0.delegate = self
+    $0.dataSoruce = self
+  }
+  
   private let disposeBag = DisposeBag()
   
   // MARK: - For transition
@@ -51,16 +54,30 @@ final class CalendarViewController:
   override init() {
     super.init()
     setupViews()
-    bind()
   }
   
   override func loadView() {
     view = contentView
   }
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    contentView.visibleDates { [weak self] segment in
+      if let date = segment.monthDates.first?.date {
+        self?.listener?.willDisplay(date: date, indexPath: .init(row: 0, section: 0))
+      }
+    }
+  }
+  
   private func setupViews() {}
   
-  private func bind() {}
+  private func bind() {
+    listener?.monthTitle
+      .subscribe(with: self) { this, title in
+        this.contentView.updateHeader(title: title)
+      }
+      .disposed(by: disposeBag)
+  }
   
   func presentWithCustomTransition(_ viewControllable: ViewControllable) {
     let viewController = viewControllable.uiviewController
@@ -75,7 +92,7 @@ final class CalendarViewController:
     /// - 해당 메서드 호출 시 `ConfigurationParameters`를 다시 설정하지 않음
     /// - `ConfigurationParameters`를 다시 설정하기 위해서는 `DataSource`를 다시 설정해야 함
     /// - 시작 날짜와 끝 날짜가 변경되었을 때 업데이트 하는 방식 확인 필요
-    contentView.monthView.reloadData()
+    contentView.reloadData()
   }
 }
 
@@ -84,18 +101,7 @@ extension CalendarViewController: CalendarTransitioning {
   var containingView: UIView? { view }
 }
 
-extension CalendarViewController: CalendarViewDelegate {
-  func calendarViewDidSelectHeader(_ view: CalendarView) {
-    listener?.didSelectHeader()
-  }
-  
-  func calendarViewDidSelectSearch(_ view: CalendarView) {
-    listener?.didSelectSearch()
-  }
-  
-  func calendarViewDidSelectNotification(_ view: CalendarView) {
-    listener?.didSelectNotification()
-  }
+extension CalendarViewController: CalendarMonthViewDelegate {
   
   func calendar(_ calendar: JTACMonthView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTACDayCell {
     let cell = calendar.dequeueCell(type: CalendarDayCell.self, for: indexPath)
@@ -118,7 +124,7 @@ extension CalendarViewController: CalendarViewDelegate {
   }
 }
 
-extension CalendarViewController: CalendarViewDataSource {
+extension CalendarViewController: CalendarMonthViewDataSource {
   func configureCalendar(_ calendar: JTACMonthView) -> ConfigurationParameters {
     guard let startDate = listener?.startDate, let endDate = listener?.endDate else {
       return .empty

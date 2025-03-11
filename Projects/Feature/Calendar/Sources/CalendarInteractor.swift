@@ -34,10 +34,13 @@ final class CalendarInteractor:
   weak var router: CalendarRouting?
   weak var listener: CalendarListener?
   
+  var monthTitle: Observable<String> { monthTitleSubject.asObservable() }
+  
   // TODO: - raw value vs. observable
   private(set) var startDate: Date = .now.addingTimeInterval(-360000000)
   private(set) var endDate: Date = .now.addingTimeInterval(360000000)
   private var models: [CalendarDayModel] = []
+  private let monthTitleSubject = BehaviorSubject<String>(value: "")
   
   private let calendarService: CalendarServicable
 
@@ -76,7 +79,8 @@ final class CalendarInteractor:
   }
   
   func willDisplay(date: Date, indexPath: IndexPath) {
-    
+    let title = date.toFormat("yyyy년 M월")
+    monthTitleSubject.onNext(title)
   }
   
   private func initialized() {

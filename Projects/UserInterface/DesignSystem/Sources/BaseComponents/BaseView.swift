@@ -8,7 +8,13 @@
 
 import UIKit
 
+import Then
+
 open class BaseView: UIView {
+  
+  public let rootView = UIView().with {
+    $0.backgroundColor = DesignSystem.BackgroundColor.base
+  }
   
   public init() {
     super.init(frame: .zero)
@@ -22,5 +28,6 @@ open class BaseView: UIView {
   
   open func setupLayout() {
     backgroundColor = DesignSystem.BackgroundColor.base
+    addSubview(rootView)
   }
 }
