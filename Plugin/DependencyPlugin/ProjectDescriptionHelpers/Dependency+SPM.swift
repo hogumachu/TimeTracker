@@ -5,7 +5,6 @@ public extension TargetDependency {
 }
 
 public extension TargetDependency.SPM {
-  static let JTAppleCalendar = TargetDependency.external(name: "JTAppleCalendar")
   static let SwiftDate = TargetDependency.external(name: "SwiftDate")
   static let Then = TargetDependency.external(name: "Then")
   static let Needle = TargetDependency.external(name: "NeedleFoundation")

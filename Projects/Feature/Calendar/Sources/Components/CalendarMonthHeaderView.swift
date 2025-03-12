@@ -11,7 +11,6 @@ import UIKit
 import DesignSystem
 
 import FlexLayout
-import JTAppleCalendar
 import PinLayout
 import Platform
 import SwiftDate

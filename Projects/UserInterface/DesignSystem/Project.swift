@@ -14,7 +14,6 @@ let project = Project.module(
         dependencies: [
           .SPM.FlexLayout,
           .SPM.PinLayout,
-          .SPM.JTAppleCalendar
         ]
       )
     ),

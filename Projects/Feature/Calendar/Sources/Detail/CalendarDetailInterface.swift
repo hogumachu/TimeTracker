@@ -6,11 +6,15 @@
 //  Copyright © 2025 com.hogumachu. All rights reserved.
 //
 
+import Foundation
+
 import RIBs
 
 // MARK: - CalendarDetailListener
 
-public protocol CalendarDetailListener: AnyObject {}
+public protocol CalendarDetailListener: AnyObject {
+  func calendarDetailDidTapClose()
+}
 
 // MARK: - CalendarDetailRouting
 
@@ -20,9 +24,11 @@ public protocol CalendarDetailRouting: ViewableRouting {}
 
 public struct CalendarDetailBuildDependency {
   public let listener: CalendarDetailListener
+  public let date: Date
   
-  public init(listener: CalendarDetailListener) {
+  public init(listener: CalendarDetailListener, date: Date) {
     self.listener = listener
+    self.date = date
   }
 }
 

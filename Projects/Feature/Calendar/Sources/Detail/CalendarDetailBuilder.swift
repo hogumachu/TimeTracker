@@ -6,6 +6,8 @@
 //  Copyright © 2025 com.hogumachu. All rights reserved.
 //
 
+import Foundation
+
 import NeedleFoundation
 import RIBs
 
@@ -35,7 +37,8 @@ final class CalendarDetailBuilder:
   ) -> CalendarDetailRouting {
     let viewController = CalendarDetailViewController()
     let interactor = CalendarDetailInteractor(
-      presenter: viewController
+      presenter: viewController,
+      date: payload.date
     )
     interactor.listener = payload.listener
     

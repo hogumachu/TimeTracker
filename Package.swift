@@ -8,7 +8,6 @@ import ProjectDescriptionHelpers
 let packageSetting = PackageSettings(
   productTypes: [
 //    "FlexLayout": .framework,
-    "JTAppleCalendar": .framework,
 //    "PinLayout": .framework,
     "RIBs": .framework,
     "SwiftDate": .framework,
@@ -27,7 +26,6 @@ let packageSetting = PackageSettings(
 let package = Package(
   name: "Package",
   dependencies: [
-    .package(url: "https://github.com/patchthecode/JTAppleCalendar", from: "8.0.5"),
     .package(url: "https://github.com/malcommac/SwiftDate", from: "7.0.0"),
     .package(url: "https://github.com/devxoul/Then", from: "3.0.0"),
     .package(url: "https://github.com/uber/needle", from: "0.25.1"),

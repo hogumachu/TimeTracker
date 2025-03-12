@@ -22,7 +22,5 @@ public protocol SelectedDayObservable: AnyObject {
 
 public protocol CalendarServicable: FocusedDateObservable,
                                     SelectedDayObservable {
-  var startDate: Observable<Date> { get }
-  var endDate: Observable<Date> { get }
   var items: Observable<[CalendarDayItem]> { get }
 }

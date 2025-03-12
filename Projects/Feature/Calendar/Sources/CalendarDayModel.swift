@@ -14,32 +14,15 @@ import Entity
 public struct CalendarDayModel: Equatable {
   public let item: CalendarDayItem
   public let isSelected: Bool
+  public let isInVisiableMonth: Bool
   
-  public init(item: CalendarDayItem, isSelected: Bool) {
+  public init(
+    item: CalendarDayItem,
+    isSelected: Bool,
+    isInVisiableMonth: Bool
+  ) {
     self.item = item
     self.isSelected = isSelected
-  }
-}
-
-extension CalendarDayModel {
-  var cellModel: CalendarDayCellModel {
-    .init(
-      day: item.day,
-      date: item.date,
-      isSelected: isSelected,
-      items: item.components.map(\.componentItem)
-    )
-  }
-}
-
-extension CalendarDayComponent {
-  var componentItem: CalendarDayCellComponentItem {
-    switch self {
-    case let .schedule(item):
-        .schedule(.init())
-      
-    case let .todo(item):
-        .todo(.init())
-    }
+    self.isInVisiableMonth = isInVisiableMonth
   }
 }

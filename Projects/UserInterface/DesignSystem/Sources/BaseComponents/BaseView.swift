@@ -27,7 +27,6 @@ open class BaseView: UIView {
   }
   
   open func setupLayout() {
-    backgroundColor = DesignSystem.BackgroundColor.base
     addSubview(rootView)
   }
 }

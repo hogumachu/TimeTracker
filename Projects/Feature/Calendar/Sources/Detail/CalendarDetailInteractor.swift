@@ -10,6 +10,7 @@ import Foundation
 
 import RIBs
 import RxSwift
+import SwiftDate
 
 // MARK: - CalendarDetailPresentable
 
@@ -27,8 +28,21 @@ final class CalendarDetailInteractor:
   weak var router: CalendarDetailRouting?
   weak var listener: CalendarDetailListener?
   
-  override init(presenter: CalendarDetailPresentable) {
+  var title: Observable<String> { titleSubject.asObservable() }
+  private lazy var titleSubject = BehaviorSubject(value: date.toFormat("M월 d일 E요일"))
+  
+  private let date: Date
+  
+  init(
+    presenter: CalendarDetailPresentable,
+    date: Date
+  ) {
+    self.date = date
     super.init(presenter: presenter)
     presenter.listener = self
+  }
+  
+  func backgroundTapped() {
+    listener?.calendarDetailDidTapClose()
   }
 }

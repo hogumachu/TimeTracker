@@ -6,6 +6,8 @@
 //  Copyright © 2025 com.hogumachu. All rights reserved.
 //
 
+import Foundation
+
 import RIBs
 
 // MARK: - CalendarListener
@@ -15,7 +17,7 @@ public protocol CalendarListener: AnyObject {}
 // MARK: - CalendarRouting
 
 public protocol CalendarRouting: ViewableRouting {
-  func attachDetail()
+  func attachDetail(date: Date)
   func detachDetail()
 }
 

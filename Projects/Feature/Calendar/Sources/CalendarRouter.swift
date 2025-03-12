@@ -45,15 +45,20 @@ final class CalendarRouter:
 
 extension CalendarRouter {
   
-  func attachDetail() {
+  func attachDetail(date: Date) {
     guard calendarDetailRouting == nil else { return }
-    let router = calendarDetailBuilder.build(with: .init(listener: interactor))
+    let router = calendarDetailBuilder.build(with: .init(listener: interactor, date: date))
     calendarDetailRouting = router
     attachChild(router)
     viewController.presentWithCustomTransition(router.viewControllable)
   }
   
   func detachDetail() {
-    
+    guard let router = calendarDetailRouting else { return }
+    router.viewControllable.dismiss { [weak self] in
+      guard let self else { return }
+      calendarDetailRouting = nil
+      detachChild(router)
+    }
   }
 }

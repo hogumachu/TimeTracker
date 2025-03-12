@@ -21,8 +21,6 @@ import Platform
 
 protocol CalendarPresentable: Presentable {
   var listener: CalendarPresentableListener? { get set }
-  func dateUpdated()
-  func scrollToDate(_ date: Date, animated: Bool)
 }
 
 // MARK: - CalendarInteractor
@@ -37,10 +35,7 @@ final class CalendarInteractor:
   
   var monthTitle: Observable<String> { monthTitleSubject.asObservable() }
   
-  // TODO: - raw value vs. observable
-  private(set) var startDate: Date?
-  private(set) var endDate: Date?
-  private var models: [CalendarDayModel] = []
+  private var items: [CalendarDayItem] = []
   private let monthTitleSubject = BehaviorSubject<String>(value: "")
   
   private let calendarService: CalendarServicable
@@ -59,10 +54,6 @@ final class CalendarInteractor:
     initialized()
   }
   
-  func model(at indexPath: IndexPath) -> CalendarDayModel? {
-    return models[safe: indexPath.row]
-  }
-  
   func didSelectHeader() {
     
   }
@@ -75,44 +66,27 @@ final class CalendarInteractor:
     
   }
   
-  func didSelect(date: Date, indexPath: IndexPath) {
-    
-  }
-  
-  func willDisplay(date: Date, indexPath: IndexPath) {
-    let title = date.toFormat("yyyy년 M월")
-    monthTitleSubject.onNext(title)
-  }
-  
   private func initialized() {
     calendarService.focusedDate
       .subscribe(with: self) { this, date in
-        this.presenter.scrollToDate(date, animated: false)
-      }
-      .disposeOnDeactivate(interactor: self)
-    
-    calendarService.startDate
-      .subscribe(with: self) { this, startDate in
-        this.startDate = startDate
-        this.dateUpdated()
-      }
-      .disposeOnDeactivate(interactor: self)
-    
-    calendarService.endDate
-      .subscribe(with: self) { this, endDate in
-        this.endDate = endDate
-        this.dateUpdated()
+        this.monthTitleSubject.onNext(date.toFormat("yyyy년 M월"))
       }
       .disposeOnDeactivate(interactor: self)
     
     calendarService.items
       .subscribe(with: self) { this, items in
-        this.models = items.map { .init(item: $0, isSelected: false) }
+        this.items = items
       }
       .disposeOnDeactivate(interactor: self)
   }
   
   private func dateUpdated() {
-    presenter.dateUpdated()
+//    presenter.dateUpdated()
+  }
+}
+
+extension CalendarInteractor {
+  func calendarDetailDidTapClose() {
+    router?.detachDetail()
   }
 }
