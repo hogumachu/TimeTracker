@@ -23,7 +23,6 @@ open class CalendarTransition: NSObject {
   }
   
   private var state: State = .present
-  private var verticalOffset: CGFloat = 0
   private let presenter: CalendarTransitioning
   
   // MARK: Initialization
@@ -43,7 +42,6 @@ open class CalendarTransition: NSObject {
     else { return }
     
     toView.layoutIfNeeded()
-    
     context.containerView.addSubview(toView)
     
     let toOrigin = context.containerView.convert(
@@ -58,10 +56,9 @@ open class CalendarTransition: NSObject {
     
     let destinationFrame = toView.frame
     
-    verticalOffset = toOrigin.y
     toView.clipsToBounds = false
     toView.frame = originFrame
-    toView.frame.origin.y -= verticalOffset
+    toView.frame.origin.y -= toOrigin.y
     toView.layoutIfNeeded()
     
     fromSharedView.alpha = 0
@@ -75,10 +72,9 @@ open class CalendarTransition: NSObject {
       duration: transitionDuration(using: context),
       dampingRatio: Constants.dampingRatio
     ).with {
-      $0.addAnimations { [weak self] in
-        guard let self = self else { return }
+      $0.addAnimations {
         toView.do {
-          $0.transform = CGAffineTransform(translationX: translation.x, y: translation.y + self.verticalOffset)
+          $0.transform = CGAffineTransform(translationX: translation.x, y: translation.y + toOrigin.y)
           $0.frame.size = destinationFrame.size
           $0.layoutIfNeeded()
         }
@@ -114,7 +110,7 @@ open class CalendarTransition: NSObject {
     
     let translation = CGPoint(
       x: destinationFrame.origin.x - fromView.frame.origin.x,
-      y: destinationFrame.origin.y + fromView.frame.origin.y
+      y: destinationFrame.origin.y + fromView.frame.origin.y + destinationFrame.height
     )
     
     toSharedView.alpha = 0
@@ -126,13 +122,13 @@ open class CalendarTransition: NSObject {
       duration: transitionDuration(using: context),
       dampingRatio: Constants.dampingRatio
     ).with {
-      $0.addAnimations { [weak self] in
-        guard let self = self else { return }
+      $0.addAnimations {
         toSharedView.transform = originalTransform
         toSharedView.alpha = 1
         
-        fromView.transform = CGAffineTransform(translationX: translation.x, y: translation.y - self.verticalOffset)
-        fromView.frame.size = destinationFrame.size
+        fromView.transform = CGAffineTransform(translationX: translation.x, y: translation.y)
+        fromView.frame.size = .zero
+        fromView.alpha = 0
         fromView.layoutIfNeeded()
       }
       

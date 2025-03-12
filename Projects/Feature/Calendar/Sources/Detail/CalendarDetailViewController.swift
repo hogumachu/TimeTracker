@@ -10,26 +10,54 @@ import UIKit
 
 import RIBs
 import RxSwift
+import RxCocoa
 
 import DesignSystem
+import FeatureUIKit
 
-protocol CalendarDetailPresentableListener: AnyObject {}
+protocol CalendarDetailPresentableListener: AnyObject {
+  var title: Observable<String> { get }
+  func backgroundTapped()
+}
 
 final class CalendarDetailViewController:
-  BaseViewController,
+  UIViewController,
   CalendarDetailPresentable,
   CalendarDetailViewControllable {
   
   weak var listener: CalendarDetailPresentableListener?
   
   private let contentView = CalendarDetailView()
+  private let disposeBag = DisposeBag()
   
-  override func loadView() {
-    view = contentView
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    bind()
+    view.addSubview(contentView)
+    contentView.translatesAutoresizingMaskIntoConstraints = false
+    
+    NSLayoutConstraint.activate([
+      contentView.topAnchor.constraint(equalTo: view.topAnchor),
+      contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+    ])
   }
   
+  private func bind() {
+    listener?.title
+      .bind(to: contentView.title)
+      .disposed(by: disposeBag)
+    
+    contentView.rx.recongnizedTap
+      .asDriver()
+      .drive(with: self) { this, _ in
+        this.listener?.backgroundTapped()
+      }
+      .disposed(by: disposeBag)
+  }
 }
 
 extension CalendarDetailViewController: CalendarTransitionable {
-  var sharedView: UIView? { contentView }
+  weak var sharedView: UIView? { contentView.sharedView }
 }

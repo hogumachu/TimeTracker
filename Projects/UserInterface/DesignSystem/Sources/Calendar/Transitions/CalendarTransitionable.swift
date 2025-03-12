@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// CalendarTransitionable는 Flexlayout, Pinlayout을 지원하지 않음
 public protocol CalendarTransitionable {
   var sharedView: UIView? { get }
   func animateAlongPresentation(animator: UIViewPropertyAnimator, origin: CGRect, destination: CGRect)
