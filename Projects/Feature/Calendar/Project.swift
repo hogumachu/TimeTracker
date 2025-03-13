@@ -15,6 +15,7 @@ let project = Project.module(
       .domain(target: .CalendarService, type: .interface),
       .feature(target: .Calendar, type: .interface),
       .feature(target: .FeatureUIKit),
+      .SPM.HorizonCalendar
     ]),
     .testing(module: .feature(.Calendar), dependencies: [
       .feature(target: .Calendar, type: .interface)

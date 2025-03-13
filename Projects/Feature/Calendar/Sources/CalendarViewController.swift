@@ -33,7 +33,7 @@ final class CalendarViewController:
     didSet { bind() }
   }
   
-  private lazy var contentView = CalendarView()
+  private lazy var contentView = CalendarContentView()
   
   private let disposeBag = DisposeBag()
   
